@@ -32,9 +32,11 @@ namespace Interactive
                 input = Console.ReadLine();
                 if (input == "=") // pause/menu button is >>> = <<<
                 {
+                    Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("        Pause Menu");
                     Console.WriteLine("To save game, enter 'S' key");
                     Console.WriteLine("To exit game, enter 'X' key");
+                    Console.ForegroundColor = ConsoleColor.White;
                     input = Console.ReadLine();
                     if (input == "S")
                     {
@@ -61,6 +63,7 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("A Short Tale of Variable Adventures");
             Console.WriteLine("By: Jacob. F. Yeomans");
+            Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             
