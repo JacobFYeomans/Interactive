@@ -10,6 +10,9 @@ namespace Interactive
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Interactive Story");
+
+            Console.ReadKey(true);
         }
     }
 }
