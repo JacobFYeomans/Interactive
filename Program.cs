@@ -21,10 +21,28 @@ namespace Interactive
                 break;
             }
         }
+        static void Menu()
+        {
+
+        }
+        static void Page()
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.WriteLine("PAGE: " + pageNumber);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+        }
         static void Main(string[] args)
         {
-            Console.WriteLine("Interactive Story");
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine("A Short Tale of Variable Adventures");
+            Console.WriteLine("By: Jacob. F. Yeomans");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine();
 
+            Page();
             PlayerInput();
 
             Console.ReadKey(true);
