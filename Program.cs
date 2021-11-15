@@ -24,7 +24,14 @@ namespace Interactive
                 break;
             }
         }
-        static void Menu() //does this need to be a separate method from PlayerInpiut();
+        static void Introduction()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
+            Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+        static void Menu() //does this need to be a separate method from PlayerInput();
         {
             gameRunning = true;
             while (gameRunning == true)
@@ -35,12 +42,17 @@ namespace Interactive
                     Console.ForegroundColor = ConsoleColor.Blue;
                     Console.WriteLine("        Pause Menu");
                     Console.WriteLine("To save game, enter 'S' key");
+                    Console.WriteLine("To load game, enter 'L' key");
                     Console.WriteLine("To exit game, enter 'X' key");
                     Console.ForegroundColor = ConsoleColor.White;
                     input = Console.ReadLine();
                     if (input == "S")
                     {
-
+                        //lmao this is going to be annoying
+                    }
+                    if (input == "L")
+                    {
+                       // ^^^^^^^^
                     }
                     if (input == "X")
                     {
@@ -66,7 +78,10 @@ namespace Interactive
             Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-            
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Introduction();
             Menu();
             //Page();
             //PlayerInput();
