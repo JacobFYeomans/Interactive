@@ -12,31 +12,13 @@ namespace Interactive
         static int pageNumber = 0;
         static string input;
         static bool acceptingInput = false;
-        static string[] story = new string[4];
+        static string[] story = new string[10];
         static void PlayerInput()
         {
             acceptingInput = true;
+            input = Console.ReadLine();
             while (acceptingInput == true)
             {
-                input = Console.ReadLine();
-                Console.WriteLine(input);
-                acceptingInput = false;
-                break;
-            }
-        }
-        static void Introduction()
-        {
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
-            Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
-            Console.ForegroundColor = ConsoleColor.White;
-        }
-        static void Menu() //does this need to be a separate method from PlayerInput();
-        {
-            gameRunning = true;
-            while (gameRunning == true)
-            {
-                input = Console.ReadLine();
                 if (input == "=") // pause/menu button is >>> = <<<
                 {
                     Console.ForegroundColor = ConsoleColor.Blue;
@@ -49,17 +31,33 @@ namespace Interactive
                     if (input == "S")
                     {
                         //lmao this is going to be annoying
+                        PlayerInput();
                     }
                     if (input == "L")
                     {
-                       // ^^^^^^^^
+                        // ^^^^^^^^
+                        PlayerInput();
                     }
                     if (input == "X")
                     {
                         Environment.Exit(0);
                     }
                 }
+                else //temporary stopgap measure
+                {
+                    PlayerInput();
+
+                }
+                acceptingInput = false;
+                break;
             }
+        }
+        static void Introduction()
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
+            Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
+            Console.ForegroundColor = ConsoleColor.White;
         }
         static void Page()
         {
@@ -77,14 +75,22 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
+            story[0] = "";
+            story[1] = "";
+            story[2] = "";
+            story[3] = "";
+            story[4] = "";
+            story[5] = "";
+            story[6] = "";
+            story[7] = "";
+            story[8] = "";
+            story[9] = "";
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
 
             Introduction();
-            Menu();
-            //Page();
-            //PlayerInput();
+            PlayerInput();
 
             Console.ReadKey(true);
         }
