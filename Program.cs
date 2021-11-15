@@ -8,6 +8,7 @@ namespace Interactive
 {
     class Program
     {
+        static bool gameRunning = false;
         static int pageNumber = 0;
         static string input;
         static bool acceptingInput = false;
@@ -18,12 +19,21 @@ namespace Interactive
             {
                 input = Console.ReadLine();
                 Console.WriteLine(input);
+                acceptingInput = false;
                 break;
             }
         }
-        static void Menu()
+        static void Menu() //does this need to be a separate method from PlayerInpiut();
         {
-
+            gameRunning = true;
+            while (gameRunning == true)
+            {
+                input = Console.ReadLine();
+                if (input == "=") // pause/menu button is >>> = <<<
+                {
+                    Console.WriteLine("debug");
+                }
+            }
         }
         static void Page()
         {
@@ -41,9 +51,10 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-
-            Page();
-            PlayerInput();
+            
+            Menu();
+            //Page();
+            //PlayerInput();
 
             Console.ReadKey(true);
         }
