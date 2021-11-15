@@ -12,6 +12,7 @@ namespace Interactive
         static int pageNumber = 0;
         static string input;
         static bool acceptingInput = false;
+        static string[] story = new string[4];
         static void PlayerInput()
         {
             acceptingInput = true;
@@ -31,7 +32,18 @@ namespace Interactive
                 input = Console.ReadLine();
                 if (input == "=") // pause/menu button is >>> = <<<
                 {
-                    Console.WriteLine("debug");
+                    Console.WriteLine("        Pause Menu");
+                    Console.WriteLine("To save game, enter 'S' key");
+                    Console.WriteLine("To exit game, enter 'X' key");
+                    input = Console.ReadLine();
+                    if (input == "S")
+                    {
+
+                    }
+                    if (input == "X")
+                    {
+                        Environment.Exit(0);
+                    }
                 }
             }
         }
