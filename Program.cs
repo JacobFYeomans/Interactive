@@ -59,7 +59,7 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
             Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
-            Console.WriteLine("                                      Press '1' to Start");
+            Console.WriteLine("                                 Press '1' to Start, or '2' to quit");
             Console.ForegroundColor = ConsoleColor.White;
         }
         static void Page(int page)
@@ -85,6 +85,7 @@ namespace Interactive
 
                 case "2":
 
+                    Environment.Exit(0);
                     break;
 
                 case "3":
@@ -98,8 +99,8 @@ namespace Interactive
                 default:
 
                     Console.WriteLine("Input not recognized, please chose option 1-4");
-                    Choice();
                     break;
+                    Choice();
             }
         }
         static void Main(string[] args)
