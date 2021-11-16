@@ -8,8 +8,7 @@ namespace Interactive
 {
     class Program
     {
-        static bool gameRunning = false;
-        static int pageNumber = 0;
+        static int pageNumber = 1;
         static string input;
         static bool acceptingInput = false;
         static string[] story = new string[10];
@@ -31,22 +30,25 @@ namespace Interactive
                     if (input == "S")
                     {
                         //lmao this is going to be annoying
-                        PlayerInput();
+                        acceptingInput = false;
+                        break;
                     }
                     if (input == "L")
                     {
                         // ^^^^^^^^
-                        PlayerInput();
+                        acceptingInput = false;
+                        break;
                     }
                     if (input == "X")
                     {
                         Environment.Exit(0);
                     }
                 }
-                else //temporary stopgap measure
+                if (input == "Q")
                 {
-                    PlayerInput();
-
+                    Page(pageNumber);
+                    acceptingInput = false;
+                    break;
                 }
                 acceptingInput = false;
                 break;
@@ -57,12 +59,15 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
             Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
+            Console.WriteLine("                                      Press 'Q' to Start");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void Page()
+        static void Page(int page)
         {
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("PAGE: " + pageNumber);
+            Console.WriteLine("PAGE: " + page);
+            Console.WriteLine();
+            Console.WriteLine(story[0]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.WriteLine();
@@ -75,11 +80,11 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
-            story[0] = "";
-            story[1] = "";
-            story[2] = "";
-            story[3] = "";
-            story[4] = "";
+            story[0] = "There once was a man from nantucket";
+            story[1] = "Who said he lived in a bucket";
+            story[2] = "he had two left shoes";
+            story[3] = "an addiction to booze";
+            story[4] = "and a burning hole in his pocket";
             story[5] = "";
             story[6] = "";
             story[7] = "";
