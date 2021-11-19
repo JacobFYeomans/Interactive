@@ -9,9 +9,11 @@ namespace Interactive
     class Program
     {
         static int pageNumber = 1;
+        static int maxPage = 10;
         static string input;
-        static bool acceptingInput = false;
         static string[] story = new string[10];
+        static int firstChoice;
+        static int secondChoice;
         //static void PlayerInput()
         //{
            // acceptingInput = true;
@@ -60,6 +62,9 @@ namespace Interactive
             Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
             Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
             Console.WriteLine("                                 Press '1' to Start, or '2' to quit");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
         }
         static void Page(int page)
@@ -72,9 +77,8 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
-        static void Choice()
+        static void ChoiceStart()
         {
-            Console.WriteLine("Make a choice 1, 2, 3, or 4");
             input = Console.ReadLine();
             switch (input)
             {
@@ -88,19 +92,33 @@ namespace Interactive
                     Environment.Exit(0);
                     break;
 
-                case "3":
+                default:
 
+                    Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit.");
+                    ChoiceStart();
+                    break;
+            }
+        }
+        static void StoryChoice()
+        {
+            input = Console.ReadLine();
+            switch (input)
+            {
+                case "1":
+
+                    Page(pageNumber);
                     break;
 
-                case "4":
+                case "2":
 
+                    Page(pageNumber);
                     break;
 
                 default:
 
-                    Console.WriteLine("Input not recognized, please chose option 1-4");
+                    Console.WriteLine("Input not recognized, please chose option 1 or 2");
+                    StoryChoice();
                     break;
-                    Choice();
             }
         }
         static void Main(string[] args)
@@ -108,24 +126,29 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("A Short Tale of Variable Adventures");
             Console.WriteLine("By: Jacob. F. Yeomans");
-            Console.WriteLine("To access menu, enter '='");
+            //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
-            story[0] = "There once was a man from nantucket";
-            story[1] = "Who said he lived in a bucket";
-            story[2] = "he had two left shoes";
-            story[3] = "an addiction to booze";
-            story[4] = "and a burning hole in his pocket";
-            story[5] = "";
-            story[6] = "";
-            story[7] = "";
-            story[8] = "";
-            story[9] = "";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
+            story[0] = "You come accross a split path, will you go left(1) or right(2)?"; //page 0
+            story[1] = "After walking some time to the left, you come accross another split path, will you go left(1) or right(2)."; //page 1
+            story[2] = "After walking some time to the right, you come accross a large tree. Will you continue past the tree(1), or inspect it?(2)"; //page 2
+            story[3] = "D"; //page 3
+            story[4] = "E"; //page 4
+            story[5] = "F"; //page 5
+            story[6] = "G"; //page 6
+            story[7] = "H"; //page 7
+            story[8] = "I"; //page 8
+            story[9] = "J"; //page 9
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+
 
             Introduction();
-            Choice();
+            ChoiceStart();
+            while (pageNumber - 1 <= maxPage)
+            {
+                StoryChoice();
+            }
 
             Console.ReadKey(true);
         }
