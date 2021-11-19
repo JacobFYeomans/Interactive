@@ -75,7 +75,7 @@ namespace Interactive
             Console.WriteLine("PAGE: " + page);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(story[page]);
+            Console.WriteLine(story[page - 1]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
@@ -108,14 +108,14 @@ namespace Interactive
             {
                 case "1":
 
-                    //do something here
-                    Page(pageNumber - 1);
+                    //do something here, do not hard code
+                    Page(pageNumber);
                     break;
 
                 case "2":
 
-                    //do something here
-                    Page(pageNumber - 1);
+                    //do something here, do not hard code
+                    Page(pageNumber);
                     break;
 
                 default:
