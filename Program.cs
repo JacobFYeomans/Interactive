@@ -8,12 +8,13 @@ namespace Interactive
 {
     class Program
     {
-        static int pageNumber = 1;
-        static int maxPage = 10;
+        static int pageNumber = 1; //current page - 1
+        static int maxPage = 9; //for range checking purposes
         static string input;
         static string[] story = new string[10];
-        static int firstChoice;
-        static int secondChoice;
+        //static int firstChoice;
+        //static int secondChoice;
+        static bool failState = false; //the game runs on a while loop that requires this to be false
         //static void PlayerInput()
         //{
            // acceptingInput = true;
@@ -67,13 +68,14 @@ namespace Interactive
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void Page(int page)
+        static void Page(int page) //calls the actual story
         {
+            // Console.WriteLine(input); this calls on the input in StoryChoice(); and thus can be used to determine if choice 1 or 2 was chosen.
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine("PAGE: " + page);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(story[page - 1]);
+            Console.WriteLine(story[page]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
@@ -98,20 +100,22 @@ namespace Interactive
                     ChoiceStart();
                     break;
             }
-        }
+        } //to chose start/quit on game load, will eventually include load from save.
         static void StoryChoice()
         {
-            input = Console.ReadLine();
+            input = Console.ReadLine(); //manages all other choices. Will eventually have a save function added.
             switch (input)
             {
                 case "1":
 
-                    Page(pageNumber);
+                    //do something here
+                    Page(pageNumber - 1);
                     break;
 
                 case "2":
 
-                    Page(pageNumber);
+                    //do something here
+                    Page(pageNumber - 1);
                     break;
 
                 default:
@@ -145,9 +149,12 @@ namespace Interactive
 
             Introduction();
             ChoiceStart();
-            while (pageNumber - 1 <= maxPage)
+            while (failState == false) //game loop
             {
-                StoryChoice();
+                while (pageNumber - 1 <= maxPage) //loop is double nested for... reasons
+                {
+                    StoryChoice();
+                }
             }
 
             Console.ReadKey(true);
