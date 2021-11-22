@@ -79,7 +79,7 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
-        static void ChoiceStart()
+        static void ChoiceStart() //merge w/ story choice, duplicate code bad
         {
             input = Console.ReadLine();
             switch (input)
@@ -132,16 +132,16 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
-            story[0] = "You come accross a split path, will you go left(1) or right(2)?"; //page 0
-            story[1] = "After walking some time to the left, you come accross another split path, will you go left(1) or right(2)."; //page 1
-            story[2] = "After walking some time to the right, you come accross a large tree. Will you continue past the tree(1), or inspect it?(2)"; //page 2
-            story[3] = "D"; //page 3
-            story[4] = "E"; //page 4
-            story[5] = "F"; //page 5
-            story[6] = "G"; //page 6
-            story[7] = "H"; //page 7
-            story[8] = "I"; //page 8
-            story[9] = "J"; //page 9
+            story[0] = "A: You come accross a split path, will you go left(1) or right(2)?"; //page 0
+            story[1] = "B: After walking some time to the left, you come accross another split path, will you go left(1) or right(2)."; //page 1
+            story[2] = "C: After walking some time to the right, you come accross a large tree. Will you continue past the tree(1), or inspect it?(2)"; //page 2
+            story[3] = "D: You go left, the path is a dead end. Game over."; //page 3
+            story[4] = "E: You go right, and find a pot of gold. You Win"; //page 4
+            story[5] = "F: You continue past the tree are are attacked by a massive spider. Game Over."; //page 5
+            story[6] = "E: You inspect the Tree, you see ancient text engraved on it. Do you try to decypher the text(1) or Ignore it(2)"; //page 6
+            story[7] = "H: The text tells you there's a large pot of gold on the other path, and that you wasted your time."; //page 7
+            story[8] = "I: You ignore the text, and the tree comes to life and eats you."; //page 8
+            story[9] = "J: End Page"; //page 9
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -151,7 +151,7 @@ namespace Interactive
             ChoiceStart();
             while (failState == false) //game loop
             {
-                while (pageNumber - 1 <= maxPage) //loop is double nested for... reasons
+                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
                 {
                     StoryChoice();
                 }
