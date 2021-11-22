@@ -62,7 +62,7 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
             Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
-            Console.WriteLine("                                 Press '1' to Start, or '2' to quit2:3");
+            Console.WriteLine("                                 Press '1' to Start, or '2' to quit");
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
