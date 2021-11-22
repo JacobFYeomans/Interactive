@@ -12,8 +12,8 @@ namespace Interactive
         static int maxPage = 9; //for range checking purposes
         static string input;
         static string[] story = new string[10];
-        //static int firstChoice;
-        //static int secondChoice;
+        static bool firstChoice = true;
+        //static int secondChoice; rpobably useless
         static bool failState = false; //the game runs on a while loop that requires this to be false
         //static void PlayerInput()
         //{
@@ -56,7 +56,7 @@ namespace Interactive
                 //acceptingInput = false;
                 //break;
             //}
-        //}
+        //} 
         static void Introduction()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -67,7 +67,7 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
-        }
+        } //Code above ^^^^^^ is probably useless code, not deleting because it might be useful, but it is unlikely.
         static void Page(int page) //calls the actual story
         {
             // Console.WriteLine(input); this calls on the input in StoryChoice(); and thus can be used to determine if choice 1 or 2 was chosen.
@@ -79,52 +79,52 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }
-        static void ChoiceStart() //merge w/ story choice, duplicate code bad
+        static void PlayerChoice() 
         {
             input = Console.ReadLine();
             switch (input)
             {
                 case "1":
 
-                    Page(pageNumber);
+                    if (firstChoice == false)
+                    {
+                        Page(pageNumber);
+                    }
+                    if (firstChoice == true)
+                    {
+                        Page(pageNumber);
+                        firstChoice = false;
+                    }
                     break;
 
                 case "2":
 
-                    Environment.Exit(0);
+                    if (firstChoice == true)
+                    {
+                        Environment.Exit(0);
+                    }
+                    if (firstChoice == false)
+                    {
+                        Page(pageNumber);
+                    }
                     break;
 
                 default:
-
-                    Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit.");
-                    ChoiceStart();
+                    
+                    if (firstChoice == true)
+                    {
+                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit.");
+                        PlayerChoice();
+                    }
+                    if (firstChoice == false)
+                    {
+                        Console.WriteLine("Input not recognized, please chose option 1 or 2");
+                        PlayerChoice();
+                    }
                     break;
+
             }
         } //to chose start/quit on game load, will eventually include load from save.
-        static void StoryChoice()
-        {
-            input = Console.ReadLine(); //manages all other choices. Will eventually have a save function added.
-            switch (input)
-            {
-                case "1":
-
-                    //do something here, do not hard code
-                    Page(pageNumber);
-                    break;
-
-                case "2":
-
-                    //do something here, do not hard code
-                    Page(pageNumber);
-                    break;
-
-                default:
-
-                    Console.WriteLine("Input not recognized, please chose option 1 or 2");
-                    StoryChoice();
-                    break;
-            }
-        }
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -148,12 +148,11 @@ namespace Interactive
 
 
             Introduction();
-            ChoiceStart();
             while (failState == false) //game loop
             {
                 while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
                 {
-                    StoryChoice();
+                    PlayerChoice();
                 }
             }
 
