@@ -14,7 +14,6 @@ namespace Interactive
         static string[] story = new string[10];
         static bool firstChoice = true;
         static string[] pageContents;
-        static int choice;
 
         //static int secondChoice; rpobably useless
         static bool failState = false; //the game runs on a while loop that requires this to be false
