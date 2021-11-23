@@ -8,55 +8,14 @@ namespace Interactive
 {
     class Program
     {
-        static int pageNumber = 1; //current page - 1
+        static int pageNumber = 0; //current page - 1
         static int maxPage = 9; //for range checking purposes
         static string input;
         static string[] story = new string[10];
         static bool firstChoice = true;
+        static char[] splitChar = { ';' };
         //static int secondChoice; rpobably useless
         static bool failState = false; //the game runs on a while loop that requires this to be false
-        //static void PlayerInput()
-        //{
-           // acceptingInput = true;
-            //input = Console.ReadLine();
-            //while (acceptingInput == true)
-            //{
-                //if (input == "=") // pause/menu button is >>> = <<<
-                //{
-                    //Console.ForegroundColor = ConsoleColor.Blue;
-                    //Console.WriteLine("        Pause Menu");
-                    //Console.WriteLine("To save game, enter 'S' key");
-                    //Console.WriteLine("To load game, enter 'L' key");
-                    //Console.WriteLine("To exit game, enter 'X' key");
-                    //Console.ForegroundColor = ConsoleColor.White;
-                    //input = Console.ReadLine();
-                    //if (input == "S")
-                    //{
-                        ////lmao this is going to be annoying
-                        //acceptingInput = false;
-                        //break;
-                    //}
-                    //if (input == "L")
-                    //{
-                        //// ^^^^^^^^
-                        //acceptingInput = false;
-                        //break;
-                    //}
-                    //if (input == "X")
-                    //{
-                        //Environment.Exit(0);
-                    //}
-                //}
-                //if (input == "Q")
-                //{
-                    //Page(pageNumber);
-                    //acceptingInput = false;
-                    //break;
-                //}
-                //acceptingInput = false;
-                //break;
-            //}
-        //} 
         static void Introduction()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -132,9 +91,9 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
-            story[0] = "You come accross a split path.; Go left.; | Go right.?;2:3"; //page 1
-            story[1] = "After walking some time to the left, you come accross another split path.; Continue left.; | Go right.;4:5"; //page 2
-            story[2] = "After walking some time to the right, you come accross a large tree.; Continue past the tree.; | Inspect the tree.;6:7"; //page 3
+            story[0] = "You come accross a split path.;Go left.;Go right.;2;3"; //page 1
+            story[1] = "After walking some time to the left, you come accross another split path.;Continue left.;Go right.;4;5"; //page 2
+            story[2] = "After walking some time to the right, you come accross a large tree.;Continue past the tree.;Inspect the tree.;6;7"; //page 3
             story[3] = "You go left, the path is a dead end. Game over."; //page 4
             story[4] = "You go right, and find a pot of gold. You Win"; //page 5
             story[5] = "You continue past the tree are are attacked by a massive spider. Game Over."; //page 6
@@ -146,11 +105,18 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
 
+            string[] pageContents;
+            pageContents = story[pageNumber].Split(';');
+            int choice = int.Parse(pageContents[4]);
+            pageNumber = choice;
+            Console.WriteLine(pageNumber);
+            
+
 
             Introduction();
             while (failState == false) //game loop
             {
-                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
+                while (pageNumber <= maxPage) //loop is double nested to allow range checking on the page
                 {
                     PlayerChoice();
                 }
