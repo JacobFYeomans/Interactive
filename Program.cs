@@ -13,7 +13,9 @@ namespace Interactive
         static string input;
         static string[] story = new string[10];
         static bool firstChoice = true;
-        static char[] splitChar = { ';' };
+        static string[] pageContents;
+        static int choice;
+
         //static int secondChoice; rpobably useless
         static bool failState = false; //the game runs on a while loop that requires this to be false
         static void Introduction()
@@ -34,9 +36,15 @@ namespace Interactive
             Console.WriteLine("PAGE: " + page);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(story[page - 1]);
+            Console.WriteLine(story[page]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
+
+            //string[] pageContents;
+            //pageContents = story[pageNumber - 1].Split(';');
+            //int choice = int.Parse(pageContents[4]);
+            //pageNumber = choice;
+            //Console.WriteLine(pageNumber);
         }
         static void PlayerChoice() 
         {
@@ -47,6 +55,9 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
+                        pageContents = story[pageNumber].Split(';');
+                        int choice = int.Parse(pageContents[3]);
+                        pageNumber = choice - 1;
                         Page(pageNumber);
                     }
                     if (firstChoice == true)
@@ -64,6 +75,9 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
+                        pageContents = story[pageNumber].Split(';');
+                        int choice = int.Parse(pageContents[4]);
+                        pageNumber = choice - 1;
                         Page(pageNumber);
                     }
                     break;
@@ -97,7 +111,7 @@ namespace Interactive
             story[3] = "You go left, the path is a dead end. Game over."; //page 4
             story[4] = "You go right, and find a pot of gold. You Win"; //page 5
             story[5] = "You continue past the tree are are attacked by a massive spider. Game Over."; //page 6
-            story[6] = "You inspect the Tree, you see ancient text engraved on it.; Decypher the text.; | Ignore it.;8:9"; //page 7
+            story[6] = "You inspect the Tree, you see ancient text engraved on it.;Decypher the text.;Ignore it.;8;9"; //page 7
             story[7] = "The text tells you there's a large pot of gold on the other path, and that you wasted your time."; //page 8
             story[8] = "You ignore the text, and the tree comes to life and eats you. Game Over."; //page 9
             story[9] = "J: End Page"; //page 10
@@ -105,18 +119,10 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
 
-            string[] pageContents;
-            pageContents = story[pageNumber].Split(';');
-            int choice = int.Parse(pageContents[4]);
-            pageNumber = choice;
-            Console.WriteLine(pageNumber);
-            
-
-
             Introduction();
             while (failState == false) //game loop
             {
-                while (pageNumber <= maxPage) //loop is double nested to allow range checking on the page
+                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
                 {
                     PlayerChoice();
                 }
