@@ -28,22 +28,16 @@ namespace Interactive
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
         } //Code above ^^^^^^ is probably useless code, not deleting because it might be useful, but it is unlikely.
-        static void Page(int page) //calls the actual story
+        static void PrintPage(int page) //calls the actual story
         {
             // Console.WriteLine(input); this calls on the input in StoryChoice(); and thus can be used to determine if choice 1 or 2 was chosen.
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("PAGE: " + page);
+            Console.WriteLine("PAGE: " + (page + 1));
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(story[page]);
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
-
-            //string[] pageContents;
-            //pageContents = story[pageNumber - 1].Split(';');
-            //int choice = int.Parse(pageContents[4]);
-            //pageNumber = choice;
-            //Console.WriteLine(pageNumber);
         }
         static void PlayerChoice() 
         {
@@ -57,11 +51,11 @@ namespace Interactive
                         pageContents = story[pageNumber].Split(';');
                         int choice = int.Parse(pageContents[3]);
                         pageNumber = choice - 1;
-                        Page(pageNumber);
+                        PrintPage(pageNumber);
                     }
                     if (firstChoice == true)
                     {
-                        Page(pageNumber);
+                        PrintPage(pageNumber);
                         firstChoice = false;
                     }
                     break;
@@ -77,7 +71,7 @@ namespace Interactive
                         pageContents = story[pageNumber].Split(';');
                         int choice = int.Parse(pageContents[4]);
                         pageNumber = choice - 1;
-                        Page(pageNumber);
+                        PrintPage(pageNumber);
                     }
                     break;
 
