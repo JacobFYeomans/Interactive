@@ -14,9 +14,8 @@ namespace Interactive
         static string[] story = new string[10];
         static bool firstChoice = true;
         static string[] pageContents;
-
-        //static int secondChoice; rpobably useless
         static bool failState = false; //the game runs on a while loop that requires this to be false
+
         static void Introduction()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
@@ -36,8 +35,16 @@ namespace Interactive
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(story[page]);
+           
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
+        }  
+        static void StringSplitter(int page) 
+        {
+            pageContents = story[pageNumber].Split(';'); 
+            int choice = int.Parse(pageContents[page]);
+            pageNumber = choice - 1;
+            PrintPage(pageNumber);
         }
         static void PlayerChoice() 
         {
@@ -48,10 +55,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        pageContents = story[pageNumber].Split(';');
-                        int choice = int.Parse(pageContents[3]);
-                        pageNumber = choice - 1;
-                        PrintPage(pageNumber);
+                        StringSplitter(3); //extra credit: make this value not static/hard coded/anti-modular
                     }
                     if (firstChoice == true)
                     {
@@ -68,10 +72,7 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
-                        pageContents = story[pageNumber].Split(';');
-                        int choice = int.Parse(pageContents[4]);
-                        pageNumber = choice - 1;
-                        PrintPage(pageNumber);
+                        StringSplitter(4); //extra credit: make this value not static/hard coded/anti-modular
                     }
                     break;
 
