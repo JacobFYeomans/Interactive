@@ -35,16 +35,26 @@ namespace Interactive
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine(story[page]);
-           
+            //if (page != 0)
+            //{
+            //    foreach (string x in pageContents)
+            //    {
+            //        if (x != null)
+            //        {
+            //            Console.WriteLine(x);
+            //        }
+
+            //    }
+            //}
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }  
-        static void StringSplitter(int page) 
+        static void StringSplitter(int page) //this makes it so the string printed is only split AFTER making a choice, which will pose problems if trying to print the string w/ a foreach loop or other method
         {
             pageContents = story[pageNumber].Split(';'); 
             int choice = int.Parse(pageContents[page]);
             pageNumber = choice - 1;
-            PrintPage(pageNumber);
+            PrintPage(pageNumber); //remove?
         }
         static void PlayerChoice() 
         {
