@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Interactive
 {
-    class Program
+    class Program //string.contains can be used to find keywords within strings to create win and lose states
     {
         static int pageNumber = 0; //current page - 1
         static int maxPage = 9; //for range checking purposes
@@ -26,7 +26,7 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.White;
-        } //Code above ^^^^^^ is probably useless code, not deleting because it might be useful, but it is unlikely.
+        } 
         static void PrintIntroInfo()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
@@ -55,18 +55,18 @@ namespace Interactive
             Console.WriteLine("PAGE: " + (page + 1));
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine(story[page]);
-            //if (page != 0)
-            //{
-            //    foreach (string x in pageContents)
-            //    {
-            //        if (x != null)
-            //        {
-            //            Console.WriteLine(x);
-            //        }
+            //Console.WriteLine(story[page]);
+            if (page != 0)
+            {
+                foreach (string x in pageContents)
+                {
+                    if (x != null)
+                    {
+                        Console.WriteLine(x);
+                    }
 
-            //    }
-            //}
+                }
+            }
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }  
@@ -75,9 +75,8 @@ namespace Interactive
             pageContents = story[pageNumber].Split(';'); 
             int choice = int.Parse(pageContents[page]);
             pageNumber = choice - 1;
-            PrintPage(pageNumber); //remove?
         }
-        static void PlayerChoice() 
+        static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
         {
             input = Console.ReadLine();
             switch (input)
@@ -90,7 +89,6 @@ namespace Interactive
                     }
                     if (firstChoice == true)
                     {
-                        PrintPage(pageNumber);
                         firstChoice = false;
                     }
                     break;
@@ -136,7 +134,9 @@ namespace Interactive
             {
                 while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
                 {
-                    PlayerChoice();
+                    StringSplitter(pageNumber);
+                    PlayerChoice(); //find a way to split story[0] before first choice is made.
+                    PrintPage(pageNumber);
                 }
             }
 
