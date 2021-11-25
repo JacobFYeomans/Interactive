@@ -47,7 +47,7 @@ namespace Interactive
             story [6] = "You inspect the Tree, you see ancient text engraved on it.;1: Decypher the text.;2: Ignore it.;8;9"; //page 7
             story [7] = "The text tells you there's a large pot of gold on the other path, and that you wasted your time.;1: delete;2: this;10;10"; //page 8
             story [8] = "You ignore the text, and the tree comes to life and eats you. Game Over.;1: delete;2: this;10;10"; //page 9
-            story [9] = "J: End Page"; //page 10 array out of bounds issue when trying to navigate to page 10, figure it out shitboy
+            story [9] = "End Page;x;x;x;x"; //page 10 array out of bounds issue when trying to navigate to page 10, figure it out shitboy
         }
         static void PrintPage(int page) //calls the actual story
         {
@@ -59,7 +59,7 @@ namespace Interactive
                 Console.ForegroundColor = ConsoleColor.Blue;
                 foreach (string x in pageContents)
                 {
-                    if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix
+                    if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix end page is not 5 segments, will not print properly
                     {
                         Console.WriteLine(x);
                         Console.WriteLine();
