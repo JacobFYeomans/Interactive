@@ -52,7 +52,7 @@ namespace Interactive
         {
             // Console.WriteLine(input); this calls on the input in StoryChoice(); and thus can be used to determine if choice 1 or 2 was chosen.
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("PAGE: " + (page + 1));
+            Console.WriteLine("PAGE: " + (page + 1)); // or pageNumber + 1. hardcoded & maybe wrong?
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
             if (page != 0)
@@ -72,12 +72,6 @@ namespace Interactive
         static void StringSplitter(int page) //Must be called before first choice.
         {
             pageContents = story[pageNumber].Split(';'); 
-            int choice = int.Parse(pageContents[page]);
-            pageNumber = choice - 1;
-        }
-        static void InitialStringSplitter(int page)
-        {
-            pageContents = story[pageNumber].Split(';');
             int choice = int.Parse(pageContents[page]);
             pageNumber = choice - 1;
         }
@@ -133,7 +127,7 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
-            InitialStringSplitter(4);
+            //StringSplitter(4); doesn't work, just skips first page entirely, also hardcoded
 
             Introduction();
             while (failState == false) //game loop
