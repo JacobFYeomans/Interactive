@@ -156,9 +156,8 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             StringSplitter();
-
             Introduction();
-            while (failState == false) //game loop
+            while (failState == false) //gameplay loop
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//array will go out of bounds before while loop breaks
                 {
@@ -169,7 +168,7 @@ namespace Interactive
                     PlayerChoice(); //find a way to split story[0] before first choice is made.
                     //GameOver();
                 }
-            }
+            } //gameplay loop
 
             Console.ReadKey(true);
         }
