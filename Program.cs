@@ -55,12 +55,11 @@ namespace Interactive
             Console.WriteLine("PAGE: " + (page + 1));
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Blue;
-            //Console.WriteLine(story[page]);
             if (page != 0)
             {
                 foreach (string x in pageContents)
                 {
-                    if (x != null)
+                    if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix
                     {
                         Console.WriteLine(x);
                     }
@@ -70,9 +69,15 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }  
-        static void StringSplitter(int page) //this makes it so the string printed is only split AFTER making a choice, which will pose problems if trying to print the string w/ a foreach loop or other method
+        static void StringSplitter(int page) //Must be called before first choice.
         {
             pageContents = story[pageNumber].Split(';'); 
+            int choice = int.Parse(pageContents[page]);
+            pageNumber = choice - 1;
+        }
+        static void InitialStringSplitter(int page)
+        {
+            pageContents = story[pageNumber].Split(';');
             int choice = int.Parse(pageContents[page]);
             pageNumber = choice - 1;
         }
@@ -128,13 +133,13 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
+            InitialStringSplitter(4);
 
             Introduction();
             while (failState == false) //game loop
             {
                 while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
                 {
-                    StringSplitter(pageNumber);
                     PlayerChoice(); //find a way to split story[0] before first choice is made.
                     PrintPage(pageNumber);
                 }
