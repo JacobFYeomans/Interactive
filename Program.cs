@@ -45,9 +45,9 @@ namespace Interactive
             story [4] = "You join a travelling trade caravan. The people of the caravan are friendly and helpful. When you arrive near the demon continent, what do you do?.;1: Safely see them to their destination.;2: Leave without a word.;11;12"; //page 5
             story [5] = "The demon lord's right hand demon notices you and decides to sink the ship.;1: Try to save the lives of the crew.;2: Try to save your own life.;10;10"; //page 6
             story [6] = "You watch as the crew is slaughtered, but escape unharmed. What do you do?;1: Steer the ship towards the demon continent.;2: Jump overboard and swim towards the demon continent.;9;10"; //page 7
-            story [7] = "The text tells you there's a large pot of gold on the other path, and that you wasted your time.;1: delete;2: this;10;10"; //page 8
+            story [7] = "I ended up not using this page, but I don't want to remove it since it requires me restructing the entire string.;1: delete;2: this;10;10"; //page 8
             story [8] = "You do not know how to pilot a ship and crash into an island. What do you do?.;1: Give up and live on the island forever.;2: Swim to safety.;10;10"; //page 9
-            story [9] = "Your efforts end in vane. The demon lord reigns victorious.;x;x;x;x"; //page 10 & bad ending page
+            story [9] = "Your efforts end in vain. The demon lord reigns victorious.;x;x;x;x"; //page 10 & bad ending page
             story [10] = "You travel with the caravan to their destination, even though it gives the demon lord more time to act. What do you do once you arrive in town safely with the caravan?;1: Stock up on supplies;2: Rush the demon lord's castle.;13;14"; //page 11
             story [11] = "Though you feel guilty, you leave the caravan quietly and head towards the demon lords castle. How will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 12
             story [12] = "Since this town is in the demon continent, the supplies are very powerful. With newfound tools inhand, how will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 13
@@ -85,7 +85,7 @@ namespace Interactive
         }
         static void DefineChoice(int page)
         {
-            choice = int.Parse(pageContents[page]);
+            choice = int.Parse(pageContents[page]); // need to do something about this, game over text doesn't display properly.
             pageNumber = choice - 1; //just so pages display properly
         }
         static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
@@ -133,13 +133,19 @@ namespace Interactive
 
             }
         } //to chose start/quit on game load, will eventually include load from save.
-        static void GameOver()
+        static void EndGame()
         {
-            if (pageNumber > 19)
+            if (pageContents[0].Contains("magnitudes"))
             {
-                Console.WriteLine("Your story is over.");
+                Console.WriteLine("Read the story again for a new outcome!");
                 Console.ReadKey(true);
-                failState = true;
+                Environment.Exit(0);
+            }
+            if (pageContents[0].Contains("vain"))
+            {
+                Console.WriteLine("Your journey is over.");
+                Console.ReadKey(true);
+                Environment.Exit(0);
             }
         }
         static void Main(string[] args)
@@ -159,8 +165,9 @@ namespace Interactive
                     StringSplitter();
                     PrintPage(pageNumber);
                     StringSplitter();
-                    PlayerChoice(); //find a way to split story[0] before first choice is made. 
-                    GameOver();
+                    EndGame(); //checks to see if the story is over
+                    PlayerChoice(); //find a way to split story[0] before first choice is made.
+                    //GameOver();
                 }
             }
 
