@@ -13,6 +13,7 @@ namespace Interactive
         static string input;
         static string[] story = new string[10];
         static bool firstChoice = true;
+        static int choice;
         static string[] pageContents;
         static bool failState = false; //the game runs on a while loop that requires this to be false
 
@@ -50,13 +51,12 @@ namespace Interactive
         }
         static void PrintPage(int page) //calls the actual story
         {
-            // Console.WriteLine(input); this calls on the input in StoryChoice(); and thus can be used to determine if choice 1 or 2 was chosen.
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine("PAGE: " + (page + 1)); // or pageNumber + 1. hardcoded & maybe wrong?
-            Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Blue;
-            if (page != 0)
+            if (page != -1 && firstChoice == false) //needs to be able to access Story[0]
             {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("PAGE: " + (page + 1)); // done so that there is no page 0
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Blue;
                 foreach (string x in pageContents)
                 {
                     if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix
@@ -69,10 +69,13 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }  
-        static void StringSplitter(int page) //Must be called before first choice.
+        static void StringSplitter() //Must be called before first choice.
         {
             pageContents = story[pageNumber].Split(';'); 
-            int choice = int.Parse(pageContents[page]);
+        }
+        static void DefineChoice(int page)
+        {
+            choice = int.Parse(pageContents[page]);
             pageNumber = choice - 1;
         }
         static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
@@ -84,7 +87,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        StringSplitter(3); //extra credit: make this value not static/hard coded/anti-modular
+                        DefineChoice(3); //extra credit: make this value not static/hard coded/anti-modular. Decouple this method from player choice.
                     }
                     if (firstChoice == true)
                     {
@@ -100,7 +103,7 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
-                        StringSplitter(4); //extra credit: make this value not static/hard coded/anti-modular
+                        DefineChoice(4); //extra credit: make this value not static/hard coded/anti-modular
                     }
                     break;
 
@@ -127,15 +130,17 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
-            //StringSplitter(4); doesn't work, just skips first page entirely, also hardcoded
+            StringSplitter();
 
             Introduction();
             while (failState == false) //game loop
             {
-                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page
+                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page//// PRINT PAGE > SPLIT STRING > ACCEPT INPUT //PrintPage(pageNumber); > StringSplitter(int) > PlayerChoice();
                 {
-                    PlayerChoice(); //find a way to split story[0] before first choice is made.
                     PrintPage(pageNumber);
+                    StringSplitter();
+                    PlayerChoice(); //find a way to split story[0] before first choice is made. 
+                    //PrintPage(pageNumber);
                 }
             }
 
