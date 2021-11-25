@@ -62,6 +62,7 @@ namespace Interactive
                     if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix
                     {
                         Console.WriteLine(x);
+                        Console.WriteLine();
                     }
 
                 }
@@ -76,7 +77,7 @@ namespace Interactive
         static void DefineChoice(int page)
         {
             choice = int.Parse(pageContents[page]);
-            pageNumber = choice - 1;
+            pageNumber = choice - 1; //just so pages display properly
         }
         static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
         {
@@ -87,7 +88,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        DefineChoice(3); //extra credit: make this value not static/hard coded/anti-modular. Decouple this method from player choice.
+                        DefineChoice(3); //Anti-Modular
                     }
                     if (firstChoice == true)
                     {
@@ -103,7 +104,7 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
-                        DefineChoice(4); //extra credit: make this value not static/hard coded/anti-modular
+                        DefineChoice(4); //Anti-Modular
                     }
                     break;
 
@@ -135,8 +136,9 @@ namespace Interactive
             Introduction();
             while (failState == false) //game loop
             {
-                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page//// PRINT PAGE > SPLIT STRING > ACCEPT INPUT //PrintPage(pageNumber); > StringSplitter(int) > PlayerChoice();
+                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page//array will go out of bounds before while loop breaks
                 {
+                    StringSplitter();
                     PrintPage(pageNumber);
                     StringSplitter();
                     PlayerChoice(); //find a way to split story[0] before first choice is made. 
