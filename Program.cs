@@ -78,7 +78,7 @@ namespace Interactive
                 {
                     if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix end page is not 5 segments, will not print properly
                     {
-                        Console.WriteLine(x);
+                        Console.WriteLine(x); //consider printing options in a different colour
                         Console.WriteLine();
                     }
 
