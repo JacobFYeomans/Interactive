@@ -31,7 +31,15 @@ namespace Interactive
         static void PrintIntroInfo()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("A Short Tale of Variable Adventures");
+            Console.WriteLine("                                        ┌─┐  ┌─┐┬ ┬┌─┐┬─┐┌┬┐  ┌┬┐┌─┐┬  ┌─┐");
+            Console.WriteLine("                                        ├─┤  └─┐├─┤│ │├┬┘ │    │ ├─┤│  ├┤ ");
+            Console.WriteLine("                                        ┴ ┴  └─┘┴ ┴└─┘┴└─ ┴    ┴ ┴ ┴┴─┘└─┘");
+            Console.WriteLine("                                         ┌─┐┌─┐  ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐");
+            Console.WriteLine("                                         │ │├┤   └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ ");
+            Console.WriteLine("                                         └─┘└     └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘");
+            Console.WriteLine("                                         ┌─┐┌┬┐┬  ┬┌─┐┌┐┌┌┬┐┬ ┬┬─┐┌─┐┌─┐");
+            Console.WriteLine("                                         ├─┤ ││└┐┌┘├┤ │││ │ │ │├┬┘├┤ └─┐");
+            Console.WriteLine("                                         ┴ ┴─┴┘ └┘ └─┘┘└┘ ┴ └─┘┴└─└─┘└─┘");
             Console.WriteLine("By: Jacob. F. Yeomans");
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
