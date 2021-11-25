@@ -178,7 +178,6 @@ namespace Interactive
                     StringSplitter();
                     EndGame(); //checks to see if the story is over
                     PlayerChoice(); //find a way to split story[0] before first choice is made.
-                    //GameOver();
                 }
             } //gameplay loop
 
