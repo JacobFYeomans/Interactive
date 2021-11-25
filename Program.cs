@@ -9,9 +9,9 @@ namespace Interactive
     class Program //string.contains can be used to find keywords within strings to create win and lose states
     {
         static int pageNumber = 0; //current page - 1
-        static int maxPage = 9; //for range checking purposes
+        static int maxPage = 19; //for range checking purposes
         static string input;
-        static string[] story = new string[10];
+        static string[] story = new string[19];
         static bool firstChoice = true;
         static int choice;
         static string[] pageContents;
@@ -38,16 +38,25 @@ namespace Interactive
         }
         static void StoryInitializtion()
         {
-            story [0] = "You come accross a split path.;1: Go left.;2: Go right.;2;3"; //page 1
-            story [1] = "After walking some time to the left, you come accross another split path.;1: Continue left.;2: Go right.;4;5"; //page 2
-            story [2] = "After walking some time to the right, you come accross a large tree.;1: Continue past the tree.;2: Inspect the tree.;6;7"; //page 3
-            story [3] = "You go left, the path is a dead end. Game over.;1: delete;2: this;10;10"; //page 4
-            story [4] = "You go right, and find a pot of gold. You Win.;1: delete;2: this;10;10"; //page 5
-            story [5] = "You continue past the tree are are attacked by a massive spider. Game Over.;1: delete;1: this;10;10"; //page 6
-            story [6] = "You inspect the Tree, you see ancient text engraved on it.;1: Decypher the text.;2: Ignore it.;8;9"; //page 7
+            story [0] = "October 17th, Imperial Year 1717. You, Hero Kels, depart on a journey to slay the demon lord.;1: Rush for the demon continent.;2: Attempt to save the people of your homeland.;2;3"; //page 1
+            story [1] = "Rushing toward your eternal adversary, you chose the mode of travel you believe will take you to the Demon continent thefastest.;1: Get on a boat.;2: Join a caravan.;4;5"; //page 2
+            story [2] = "You ceasely run around, trying to help the people of your nation. The demon lord becomes more bold due to your lack of action;1: Continue helping.;2: Rush to fight the demon lord.;10;2"; //page 3
+            story [3] = "Getting on your chosen vessel, you are attacked by the demon lord's right hand demon, how do you react.;1: Reveal your prescense and save the day!;2: Allow the demon to slaughter the crew without being noticed, and then commendeer the boat to continue your journey.;6;7"; //page 4
+            story [4] = "You join a travelling trade caravan. The people of the caravan are friendly and helpful. When you arrive near the demon continent, what do you do?.;1: Safely see them to their destination.;2: Leave without a word.;11;12"; //page 5
+            story [5] = "The demon lord's right hand demon notices you and decides to sink the ship.;1: Try to save the lives of the crew.;2: Try to save your own life.;10;10"; //page 6
+            story [6] = "You watch as the crew is slaughtered, but escape unharmed. What do you do?;1: Steer the ship towards the demon continent.;2: Jump overboard and swim towards the demon continent.;9;10"; //page 7
             story [7] = "The text tells you there's a large pot of gold on the other path, and that you wasted your time.;1: delete;2: this;10;10"; //page 8
-            story [8] = "You ignore the text, and the tree comes to life and eats you. Game Over.;1: delete;2: this;10;10"; //page 9
-            story [9] = "End Page;x;x;x;x"; //page 10 array out of bounds issue when trying to navigate to page 10, figure it out shitboy
+            story [8] = "You do not know how to pilot a ship and crash into an island. What do you do?.;1: Give up and live on the island forever.;2: Swim to safety.;10;10"; //page 9
+            story [9] = "Your efforts end in vane. The demon lord reigns victorious.;x;x;x;x"; //page 10 & bad ending page
+            story [10] = "You travel with the caravan to their destination, even though it gives the demon lord more time to act. What do you do once you arrive in town safely with the caravan?;1: Stock up on supplies;2: Rush the demon lord's castle.;13;14"; //page 11
+            story [11] = "Though you feel guilty, you leave the caravan quietly and head towards the demon lords castle. How will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 12
+            story [12] = "Since this town is in the demon continent, the supplies are very powerful. With newfound tools inhand, how will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 13
+            story [13] = "You begin your attack the demon lord's castle. Eventually, after a long and gruelling effort, you find yourself face to face with the demon lord. What do you do?;1: Attack.;2: Try to bargain for peace.;15;17"; //page 14
+            story [14] = "You attack the demon lord with everything you have...;1: Wait for the result.;2: Wait for the result.;16;16"; //page 15
+            story [15] = "Even with all your might, the demon lord does not fall.;1: Struggle until the end.;2: Try one more time, with everything you have left.;10;10"; //page 16
+            story [16] = "The demon lord is amicable to peace, and your journey is at its end;1: Celebrate peace with the demon lord.;2: Return home and celebrate peace with your family;18;18"; //page 17
+            story [17] = "The celebration of peace grows to magnitudes never before seen, and becomes a yearly tradition that endures for many, many centuries to come.;1: Party until your drunk.;2: Leave and go on a new adventure.;19;19"; //page 18
+            story [18] = "The End.;x;x;x;x"; //page 19
         }
         static void PrintPage(int page) //calls the actual story
         {
@@ -124,6 +133,15 @@ namespace Interactive
 
             }
         } //to chose start/quit on game load, will eventually include load from save.
+        static void GameOver()
+        {
+            if (pageNumber > 19)
+            {
+                Console.WriteLine("Your story is over.");
+                Console.ReadKey(true);
+                failState = true;
+            }
+        }
         static void Main(string[] args)
         {
             PrintIntroInfo();
@@ -136,13 +154,13 @@ namespace Interactive
             Introduction();
             while (failState == false) //game loop
             {
-                while (pageNumber - 1 <= maxPage) //loop is double nested to allow range checking on the page//array will go out of bounds before while loop breaks
+                while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//array will go out of bounds before while loop breaks
                 {
                     StringSplitter();
                     PrintPage(pageNumber);
                     StringSplitter();
                     PlayerChoice(); //find a way to split story[0] before first choice is made. 
-                    //PrintPage(pageNumber);
+                    GameOver();
                 }
             }
 
