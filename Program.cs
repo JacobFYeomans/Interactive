@@ -8,7 +8,7 @@ namespace Interactive
 {
     class Program //string.contains can be used to find keywords within strings to create win and lose states
     {
-        static int pageNumber = 0; //current page - 1
+        static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
         static int maxPage = 19; //for range checking purposes
         static string input;
         static string[] story = new string[19];
@@ -46,7 +46,7 @@ namespace Interactive
         }
         static void StoryInitializtion()
         {
-            story [0] = "October 17th, Imperial Year 1717. You, Hero Kels, depart on a journey to slay the demon lord.;1: Rush for the demon continent.;2: Attempt to save the people of your homeland.;2;3"; //page 1
+            story [0] = "October 17th, Imperial Year 1717. You, Hero Kels, depart on a journey to slay the demon lord. How will you start your   journey?;1: Immediately rush for the demon continent.;2: Attempt to save the people of your homeland first.;2;3"; //page 1
             story [1] = "Rushing toward your eternal adversary, you chose the mode of travel you believe will take you to the Demon continent thefastest.;1: Get on a boat.;2: Join a caravan.;4;5"; //page 2
             story [2] = "You ceasely run around, trying to help the people of your nation. The demon lord becomes more bold due to your lack of action;1: Continue helping.;2: Rush to fight the demon lord.;10;2"; //page 3
             story [3] = "Getting on your chosen vessel, you are attacked by the demon lord's right hand demon, how do you react.;1: Reveal your prescense and save the day!;2: Allow the demon to slaughter the crew without being noticed, and then commendeer the boat to continue your journey.;6;7"; //page 4
@@ -95,7 +95,7 @@ namespace Interactive
         {
             choice = int.Parse(pageContents[page]); // need to do something about this, game over text doesn't display properly.
             pageNumber = choice - 1; //just so pages display properly
-        }
+        } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
         {
             input = Console.ReadLine();
