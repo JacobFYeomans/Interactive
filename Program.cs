@@ -129,7 +129,7 @@ namespace Interactive
                     
                     if (firstChoice == true)
                     {
-                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit.");
+                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit."); // skips first page if improper input on Start/Quit
                         PlayerChoice();
                     }
                     if (firstChoice == false)
@@ -171,7 +171,7 @@ namespace Interactive
             Introduction();
             while (failState == false) //gameplay loop
             {
-                while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//array will go out of bounds before while loop breaks
+                while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
                     StringSplitter();
                     PrintPage(pageNumber);
