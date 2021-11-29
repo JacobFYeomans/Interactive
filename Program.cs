@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace Interactive
         static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
         static int maxPage = 19; //for range checking purposes
         static string input;
-        static string[] story = new string[19];
+        static string[] story = File.ReadAllLines(@"story.txt");
         static bool firstChoice = true;
         static int choice;
         static string[] pageContents;
@@ -43,28 +44,6 @@ namespace Interactive
             Console.WriteLine("By: Jacob. F. Yeomans");
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
-        }
-        static void StoryInitializtion()
-        {
-            story [0] = "October 17th, Imperial Year 1717. You, Hero Kels, depart on a journey to slay the demon lord. How will you start your   journey?;1: Immediately rush for the demon continent.;2: Attempt to save the people of your homeland first.;2;3"; //page 1
-            story [1] = "Rushing toward your eternal adversary, you chose the mode of travel you believe will take you to the Demon continent thefastest.;1: Get on a boat.;2: Join a caravan.;4;5"; //page 2
-            story [2] = "You ceasely run around, trying to help the people of your nation. The demon lord becomes more bold due to your lack of action;1: Continue helping.;2: Rush to fight the demon lord.;10;2"; //page 3
-            story [3] = "Getting on your chosen vessel, you are attacked by the demon lord's right hand demon, how do you react.;1: Reveal your prescense and save the day!;2: Allow the demon to slaughter the crew without being noticed, and then commendeer the boat to continue your journey.;6;7"; //page 4
-            story [4] = "You join a travelling trade caravan. The people of the caravan are friendly and helpful. When you arrive near the demon continent, what do you do?.;1: Safely see them to their destination.;2: Leave without a word.;11;12"; //page 5
-            story [5] = "The demon lord's right hand demon notices you and decides to sink the ship.;1: Try to save the lives of the crew.;2: Try to save your own life.;10;10"; //page 6
-            story [6] = "You watch as the crew is slaughtered, but escape unharmed. What do you do?;1: Steer the ship towards the demon continent.;2: Jump overboard and swim towards the demon continent.;9;10"; //page 7
-            story [7] = "I ended up not using this page, but I don't want to remove it since it requires me restructing the entire string.;1: delete;2: this;10;10"; //page 8
-            story [8] = "You do not know how to pilot a ship and crash into an island. What do you do?.;1: Give up and live on the island forever.;2: Swim to safety.;10;10"; //page 9
-            story [9] = "Your efforts end in vain. The demon lord reigns victorious.;x;x;x;x"; //page 10 & bad ending page
-            story [10] = "You travel with the caravan to their destination, even though it gives the demon lord more time to act. What do you do once you arrive in town safely with the caravan?;1: Stock up on supplies;2: Rush the demon lord's castle.;13;14"; //page 11
-            story [11] = "Though you feel guilty, you leave the caravan quietly and head towards the demon lords castle. How will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 12
-            story [12] = "Since this town is in the demon continent, the supplies are very powerful. With newfound tools inhand, how will you attack the demon lord's castle?;1: Brazenly;2: Stealthily;14;14"; //page 13
-            story [13] = "You begin your attack the demon lord's castle. Eventually, after a long and gruelling effort, you find yourself face to face with the demon lord. What do you do?;1: Attack.;2: Try to bargain for peace.;15;17"; //page 14
-            story [14] = "You attack the demon lord with everything you have...;1: Wait for the result.;2: Wait for the result.;16;16"; //page 15
-            story [15] = "Even with all your might, the demon lord does not fall.;1: Struggle until the end.;2: Try one more time, with everything you have left.;10;10"; //page 16
-            story [16] = "The demon lord is amicable to peace, and your journey is at its end;1: Celebrate peace with the demon lord.;2: Return home and celebrate peace with your family;18;18"; //page 17
-            story [17] = "The celebration of peace grows to magnitudes never before seen, and becomes a yearly tradition that endures for many, many centuries to come.;1: Party until your drunk.;2: Leave and go on a new adventure.;19;19"; //page 18
-            story [18] = "The End.;x;x;x;x"; //page 19
         }
         static void PrintPage(int page) //calls the actual story
         {
@@ -163,7 +142,6 @@ namespace Interactive
         static void Main(string[] args)
         {
             PrintIntroInfo();
-            StoryInitializtion();
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
