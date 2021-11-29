@@ -45,6 +45,10 @@ namespace Interactive
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
         }
+        static void PrintMainMenu()
+        {
+
+        }
         static void PrintPage(int page) //calls the actual story
         {
             if (page != -1 && firstChoice == false) //needs to be able to access Story[0]
@@ -70,12 +74,16 @@ namespace Interactive
         {
             pageContents = story[pageNumber].Split(';'); 
         }
+        static void SavePage()
+        {
+            //File.WriteAllLines(@"save.txt", ); //create SavePage method
+        }
         static void DefineChoice(int page)
         {
             choice = int.Parse(pageContents[page]); // need to do something about this, game over text doesn't display properly.
             pageNumber = choice - 1; //just so pages display properly
         } //Console.Beep(tone, length); for sound effects
-        static void PlayerChoice() //perhaps decouple StringSplitter from PlayerChoice
+        static void PlayerChoice() //add 3 and 4 for save and quit
         {
             input = Console.ReadLine();
             switch (input)
