@@ -16,4 +16,4 @@ You attack the demon lord with everything you have...;1: Wait for the result.;2:
 Even with all your might, the demon lord does not fall.;1: Struggle until the end.;2: Try one more time, with everything you have left.;10;10
 The demon lord is amicable to peace, and your journey is at its end;1: Celebrate peace with the demon lord.;2: Return home and celebrate peace with your family;18;18
 The celebration of peace grows to magnitudes never before seen, and becomes a yearly tradition that endures for many, many centuries to come.;1: Party until your drunk.;2: Leave and go on a new adventure.;19;19
-The End.;x;x;x;x
+Good Ending.;x;x;x;x

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Interactive
 {
-    class Program //string.contains can be used to find keywords within strings to create win and lose states
+    class Program //make text appear slowly
     {
         static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
         static int maxPage = 19; //for range checking purposes
@@ -23,7 +23,7 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
             Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
-            Console.WriteLine("                                 Press '1' to Start, or '2' to quit");
+            Console.WriteLine("                           Press '1' to Start, '2' to quit, or '3' to load");
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -48,10 +48,10 @@ namespace Interactive
         static void PrintMainMenu()
         {
 
-        }
-        static void PrintPage(int page) //calls the actual story
+        }//to be used
+        static void PrintPage(int page)
         {
-            if (page != -1 && firstChoice == false) //needs to be able to access Story[0]
+            if (page != -1 && firstChoice == false) 
             {
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("PAGE: " + (page + 1)); // done so that there is no page 0
@@ -74,14 +74,10 @@ namespace Interactive
         {
             pageContents = story[pageNumber].Split(';'); 
         }
-        static void SavePage()
-        {
-            //File.WriteAllLines(@"save.txt", ); //create SavePage method
-        }
         static void DefineChoice(int page)
         {
-            choice = int.Parse(pageContents[page]); // need to do something about this, game over text doesn't display properly.
-            pageNumber = choice - 1; //just so pages display properly
+            choice = int.Parse(pageContents[page]);
+            pageNumber = choice - 1; 
         } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //add 3 and 4 for save and quit
         {
@@ -108,7 +104,24 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
-                        DefineChoice(4); //Anti-Modular
+                        DefineChoice(4); 
+                    }
+                    break;
+
+                case "3":
+
+                    if (firstChoice == true)
+                    {
+                        string savePage = File.ReadAllText(@"save.txt");
+                        pageNumber = int.Parse(savePage);
+                        PlayerChoice();
+
+                    }
+                    if (firstChoice == false)
+                    {
+                        string savePageNumber = pageNumber.ToString();
+                        File.WriteAllText(@"save.txt", savePageNumber);
+                        PlayerChoice();
                     }
                     break;
 
@@ -116,7 +129,7 @@ namespace Interactive
                     
                     if (firstChoice == true)
                     {
-                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit."); // skips first page if improper input on Start/Quit
+                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit."); // skips first page if improper input on Start/Quit OR if you try to load game
                         PlayerChoice();
                     }
                     if (firstChoice == false)
@@ -130,7 +143,7 @@ namespace Interactive
         } //to chose start/quit on game load, will eventually include load from save.
         static void EndGame()
         {
-            if (pageContents[0].Contains("magnitudes"))
+            if (pageContents[0].Contains("Ending"))
             {
                 Console.WriteLine("      ┬─┐┌─┐┌─┐┌┬┐  ┌┬┐┬ ┬┌─┐  ┌─┐┌┬┐┌─┐┬─┐┬ ┬  ┌─┐┌─┐┌─┐┬┌┐┌  ┌─┐┌─┐┬─┐  ┌─┐  ┌┐┌┌─┐┬ ┬  ┌─┐┬ ┬┌┬┐┌─┐┌─┐┌┬┐┌─┐┬");
                 Console.WriteLine("      ├┬┘├┤ ├─┤ ││   │ ├─┤├┤   └─┐ │ │ │├┬┘└┬┘  ├─┤│ ┬├─┤││││  ├┤ │ │├┬┘  ├─┤  │││├┤ │││  │ ││ │ │ │  │ ││││├┤ │");
@@ -163,7 +176,7 @@ namespace Interactive
                     PrintPage(pageNumber);
                     StringSplitter();
                     EndGame(); //checks to see if the story is over
-                    PlayerChoice(); //find a way to split story[0] before first choice is made.
+                    PlayerChoice();
                 }
             } //gameplay loop
 
