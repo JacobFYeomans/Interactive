@@ -49,6 +49,10 @@ namespace Interactive
         {
 
         }//to be used
+        static void saveFileCheck()//to be used
+        {
+
+        }
         static void PrintPage(int page)
         {
             if (page != -1 && firstChoice == false) 
