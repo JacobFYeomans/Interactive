@@ -74,10 +74,14 @@ namespace Interactive
         {
             pageContents = story[pageNumber].Split(';'); 
         }
+        static void ClearScreen() //to be used
+        {
+
+        }
         static void DefineChoice(int page)
         {
             choice = int.Parse(pageContents[page]);
-            pageNumber = choice - 1; 
+            pageNumber = choice - 1; //this is where the page skip comes in
         } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //add 3 and 4 for save and quit
         {
@@ -110,18 +114,18 @@ namespace Interactive
 
                 case "3":
 
+                    if (firstChoice == false)
+                    {
+                        string savePageNumber = pageNumber.ToString();
+                        File.WriteAllText(@"save.txt", savePageNumber); //maybe it's rebuilding the txt on run, making the save file ineffective.
+                        PlayerChoice();
+                    }
                     if (firstChoice == true)
                     {
                         string savePage = File.ReadAllText(@"save.txt");
                         pageNumber = int.Parse(savePage);
-                        PlayerChoice();
+                        firstChoice = false;
 
-                    }
-                    if (firstChoice == false)
-                    {
-                        string savePageNumber = pageNumber.ToString();
-                        File.WriteAllText(@"save.txt", savePageNumber);
-                        PlayerChoice();
                     }
                     break;
 
