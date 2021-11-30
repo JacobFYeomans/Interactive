@@ -117,13 +117,13 @@ namespace Interactive
                     if (firstChoice == false)
                     {
                         string savePageNumber = pageNumber.ToString();
-                        File.WriteAllText(@"save.txt", savePageNumber); //maybe it's rebuilding the txt on run, making the save file ineffective.
+                        File.WriteAllText(@"save.txt", savePageNumber); //it is rebuilding the save file on run, rendering saving ineffective.
                         PlayerChoice();
                     }
                     if (firstChoice == true)
                     {
                         string savePage = File.ReadAllText(@"save.txt");
-                        pageNumber = int.Parse(savePage);
+                        pageNumber = int.Parse(savePage); //range check for null
                         firstChoice = false;
 
                     }
