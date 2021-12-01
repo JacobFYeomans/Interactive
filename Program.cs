@@ -10,9 +10,9 @@ namespace Interactive
     class Program //make text appear slowly
     {
         static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
-        static int maxPage = 19; //for range checking purposes, find a way to parse the number of lines read from story.txt
         static string input;
         static string[] story = File.ReadAllLines(@"story.txt"); //parse # of lines read, make maxPages = # of lines read.
+        static int maxPage = story.Length; //for range checking purposes
         static bool firstChoice = true;
         static int choice;
         static string[] pageContents;
@@ -78,7 +78,7 @@ namespace Interactive
                 {
                     if (x != null && x != pageContents[3] && x != pageContents[4]) // X != null is to prevent an issue in which x can be null, x != pageContents[3] & [4] is to prevent the last 2 segments of the text from being printed
                     {
-                            Console.WriteLine(x);
+                            Console.WriteLine(x); //figure out colour
                             Console.WriteLine();
                     }
 
@@ -163,6 +163,12 @@ namespace Interactive
             pageContents = story[pageNumber].Split(';');
             firstChoice = true;
         }
+        static void ReturnMainMenu()
+        {
+            ClearScreen();
+            ResetGame();
+            PrintMainMenu();
+        }
         static void SaveGame()
         {
             string savePageNumber = pageNumber.ToString();
@@ -184,9 +190,7 @@ namespace Interactive
                 Console.WriteLine("      ├┬┘├┤ ├─┤ ││   │ ├─┤├┤   └─┐ │ │ │├┬┘└┬┘  ├─┤│ ┬├─┤││││  ├┤ │ │├┬┘  ├─┤  │││├┤ │││  │ ││ │ │ │  │ ││││├┤ │");
                 Console.WriteLine("      ┴└─└─┘┴ ┴─┴┘   ┴ ┴ ┴└─┘  └─┘ ┴ └─┘┴└─ ┴   ┴ ┴└─┘┴ ┴┴┘└┘  └  └─┘┴└─  ┴ ┴  ┘└┘└─┘└┴┘  └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘o");
                 Console.ReadKey(true);
-                ClearScreen();
-                ResetGame();
-                PrintMainMenu(); //also skips first page if replaying
+                ReturnMainMenu();
             }
             if (story[9].Contains(pageContents[0])) //change the 9 into something else, is hardcoded
             {
@@ -194,9 +198,7 @@ namespace Interactive
                 Console.WriteLine("                                   └┬┘│ ││ │├┬┘   ││ ││ │├┬┘│││├┤ └┬┘  │└─┐  │ │└┐┌┘├┤ ├┬┘");
                 Console.WriteLine("                                    ┴ └─┘└─┘┴└─  └┘└─┘└─┘┴└─┘└┘└─┘ ┴   ┴└─┘  └─┘ └┘ └─┘┴└─");
                 Console.ReadKey(true);
-                ClearScreen();
-                ResetGame();
-                PrintMainMenu(); //also skips first page if replaying
+                ReturnMainMenu();
             }
         }
         static void Main(string[] args)
