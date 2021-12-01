@@ -10,7 +10,7 @@ namespace Interactive
     class Program //make text appear slowly
     {
         static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
-        static int maxPage = 19; //for range checking purposes
+        static int maxPage = 19; //for range checking purposes, find a way to parse the number of lines read from story.txt
         static string input;
         static string[] story = File.ReadAllLines(@"story.txt");
         static bool firstChoice = true;
@@ -60,10 +60,10 @@ namespace Interactive
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("PAGE: " + (page + 1)); // done so that there is no page 0
                 Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Red;
                 foreach (string x in pageContents)
                 {
-                    if (x != null && x != pageContents[3] && x != pageContents[4]) //anti-modular, extra credit to fix end page is not 5 segments, will not print properly
+                    if (x != null && x != pageContents[3] && x != pageContents[4]) // X != null is to prevent an issue in which x can be null, x != pageContents[3] & [4] is to prevent the last 2 segments of the text from being printed
                     {
                         Console.WriteLine(x); //consider printing options in a different colour
                         Console.WriteLine();
@@ -74,13 +74,13 @@ namespace Interactive
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
         }  
-        static void StringSplitter() //Must be called before first choice.
+        static void SplitString() //Must be called before first choice.
         {
             pageContents = story[pageNumber].Split(';'); 
         }
-        static void ClearScreen() //to be used
+        static void ClearScreen() 
         {
-
+            Console.Clear();
         }
         static void DefineChoice(int page)
         {
@@ -174,17 +174,18 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
-            StringSplitter();
+            SplitString();
             Introduction();
             while (failState == false) //gameplay loop
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
-                    StringSplitter();
+                    SplitString();
                     PrintPage(pageNumber);
-                    StringSplitter();
+                    SplitString();
                     EndGame(); //checks to see if the story is over
                     PlayerChoice();
+                    ClearScreen(); //clears the screen for presentation purposes
                 }
             } //gameplay loop
 
