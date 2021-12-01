@@ -132,16 +132,11 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        string savePageNumber = pageNumber.ToString();
-                        File.WriteAllText(@"save.txt", savePageNumber); //it is rebuilding the save file on run, rendering saving ineffective.
-                        PlayerChoice();
+                        SaveGame();
                     }
                     if (firstChoice == true)
                     {
-                        string savePage = File.ReadAllText(@"save.txt");
-                        pageNumber = int.Parse(savePage); //range check for null
-                        firstChoice = false;
-
+                        LoadGame();
                     }
                     break;
 
@@ -160,7 +155,20 @@ namespace Interactive
                     break;
 
             }
-        } //to chose start/quit on game load, will eventually include load from save.
+        }
+        static void SaveGame()
+        {
+            string savePageNumber = pageNumber.ToString();
+            File.WriteAllText(@"save.txt", savePageNumber);
+            Console.WriteLine("File Saved.");
+            PlayerChoice();
+        }
+        static void LoadGame()
+        {
+            string savePage = File.ReadAllText(@"save.txt");
+            pageNumber = int.Parse(savePage); //range check for null
+            firstChoice = false;
+        }
         static void EndGame()
         {
             if (story[maxPage - 1].Contains(pageContents[0])) //if (pageContents[0].Contains("Ending"))
