@@ -59,6 +59,12 @@ namespace Interactive
         {
 
         }
+
+        static void ColourText()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+        }
         static void PrintPage(int page)
         {
             if (page != -1 && firstChoice == false) 
@@ -66,13 +72,13 @@ namespace Interactive
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("PAGE: " + (page + 1)); // done so that there is no page 0
                 Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Blue;
                 foreach (string x in pageContents)
                 {
                     if (x != null && x != pageContents[3] && x != pageContents[4]) // X != null is to prevent an issue in which x can be null, x != pageContents[3] & [4] is to prevent the last 2 segments of the text from being printed
                     {
-                        Console.WriteLine(x); //consider printing options in a different colour
-                        Console.WriteLine();
+                            Console.WriteLine(x);
+                            Console.WriteLine();
                     }
 
                 }
