@@ -53,7 +53,8 @@ namespace Interactive
         }
         static void PrintMainMenu() //merge intro and intro info?
         {
-
+            PrintIntroInfo();
+            Introduction();
         }
         static void saveFileCheck()//to be used
         {
@@ -156,6 +157,12 @@ namespace Interactive
 
             }
         }
+        static void ResetGame() //resets story
+        {
+            pageNumber = 0;
+            pageContents = story[pageNumber].Split(';');
+            firstChoice = true;
+        }
         static void SaveGame()
         {
             string savePageNumber = pageNumber.ToString();
@@ -177,7 +184,9 @@ namespace Interactive
                 Console.WriteLine("      ├┬┘├┤ ├─┤ ││   │ ├─┤├┤   └─┐ │ │ │├┬┘└┬┘  ├─┤│ ┬├─┤││││  ├┤ │ │├┬┘  ├─┤  │││├┤ │││  │ ││ │ │ │  │ ││││├┤ │");
                 Console.WriteLine("      ┴└─└─┘┴ ┴─┴┘   ┴ ┴ ┴└─┘  └─┘ ┴ └─┘┴└─ ┴   ┴ ┴└─┘┴ ┴┴┘└┘  └  └─┘┴└─  ┴ ┴  ┘└┘└─┘└┴┘  └─┘└─┘ ┴ └─┘└─┘┴ ┴└─┘o");
                 Console.ReadKey(true);
-                Environment.Exit(0);
+                ClearScreen();
+                ResetGame();
+                PrintMainMenu(); //also skips first page if replaying
             }
             if (story[9].Contains(pageContents[0])) //change the 9 into something else, is hardcoded
             {
@@ -185,7 +194,9 @@ namespace Interactive
                 Console.WriteLine("                                   └┬┘│ ││ │├┬┘   ││ ││ │├┬┘│││├┤ └┬┘  │└─┐  │ │└┐┌┘├┤ ├┬┘");
                 Console.WriteLine("                                    ┴ └─┘└─┘┴└─  └┘└─┘└─┘┴└─┘└┘└─┘ ┴   ┴└─┘  └─┘ └┘ └─┘┴└─");
                 Console.ReadKey(true);
-                Environment.Exit(0);
+                ClearScreen();
+                ResetGame();
+                PrintMainMenu(); //also skips first page if replaying
             }
         }
         static void Main(string[] args)
