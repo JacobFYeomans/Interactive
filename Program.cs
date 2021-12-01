@@ -12,7 +12,7 @@ namespace Interactive
         static int pageNumber = 0; //current page, displayed value is +1 to prevent a page 0 from existing.
         static int maxPage = 19; //for range checking purposes, find a way to parse the number of lines read from story.txt
         static string input;
-        static string[] story = File.ReadAllLines(@"story.txt");
+        static string[] story = File.ReadAllLines(@"story.txt"); //parse # of lines read, make maxPages = # of lines read.
         static bool firstChoice = true;
         static int choice;
         static string[] pageContents;
@@ -21,9 +21,15 @@ namespace Interactive
         static void Introduction()
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Welcome to a variable tale. In the course of your journey, you will make many choices that will define your story.");
-            Console.WriteLine("                    Now, make your first choice... will you start your adventure?");
-            Console.WriteLine("                           Press '1' to Start, '2' to quit, or '3' to load");
+            Console.WriteLine(""); 
+            Console.WriteLine("");
+            Console.WriteLine("                                         Press '1' to Start");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("                                         Press '2' to quit");
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("                                         Press '3' to load");
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
@@ -32,23 +38,23 @@ namespace Interactive
         static void PrintIntroInfo()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
-            Console.WriteLine("                                        ┌─┐  ┌─┐┬ ┬┌─┐┬─┐┌┬┐  ┌┬┐┌─┐┬  ┌─┐");
-            Console.WriteLine("                                        ├─┤  └─┐├─┤│ │├┬┘ │    │ ├─┤│  ├┤ ");
-            Console.WriteLine("                                        ┴ ┴  └─┘┴ ┴└─┘┴└─ ┴    ┴ ┴ ┴┴─┘└─┘");
-            Console.WriteLine("                                         ┌─┐┌─┐  ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐");
-            Console.WriteLine("                                         │ │├┤   └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ ");
-            Console.WriteLine("                                         └─┘└     └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘");
-            Console.WriteLine("                                         ┌─┐┌┬┐┬  ┬┌─┐┌┐┌┌┬┐┬ ┬┬─┐┌─┐┌─┐");
-            Console.WriteLine("                                         ├─┤ ││└┐┌┘├┤ │││ │ │ │├┬┘├┤ └─┐");
-            Console.WriteLine("                                         ┴ ┴─┴┘ └┘ └─┘┘└┘ ┴ └─┘┴└─└─┘└─┘");
+            Console.WriteLine("                                  ┌─┐  ┌─┐┬ ┬┌─┐┬─┐┌┬┐  ┌┬┐┌─┐┬  ┌─┐");
+            Console.WriteLine("                                  ├─┤  └─┐├─┤│ │├┬┘ │    │ ├─┤│  ├┤ ");
+            Console.WriteLine("                                  ┴ ┴  └─┘┴ ┴└─┘┴└─ ┴    ┴ ┴ ┴┴─┘└─┘");
+            Console.WriteLine("                                   ┌─┐┌─┐  ┬  ┬┌─┐┬─┐┬┌─┐┌┐ ┬  ┌─┐");
+            Console.WriteLine("                                   │ │├┤   └┐┌┘├─┤├┬┘│├─┤├┴┐│  ├┤ ");
+            Console.WriteLine("                                   └─┘└     └┘ ┴ ┴┴└─┴┴ ┴└─┘┴─┘└─┘");
+            Console.WriteLine("                                   ┌─┐┌┬┐┬  ┬┌─┐┌┐┌┌┬┐┬ ┬┬─┐┌─┐┌─┐");
+            Console.WriteLine("                                   ├─┤ ││└┐┌┘├┤ │││ │ │ │├┬┘├┤ └─┐");
+            Console.WriteLine("                                   ┴ ┴─┴┘ └┘ └─┘┘└┘ ┴ └─┘┴└─└─┘└─┘");
             Console.WriteLine("By: Jacob. F. Yeomans");
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void PrintMainMenu()
+        static void PrintMainMenu() //merge intro and intro info?
         {
 
-        }//to be used
+        }
         static void saveFileCheck()//to be used
         {
 
@@ -151,7 +157,7 @@ namespace Interactive
         } //to chose start/quit on game load, will eventually include load from save.
         static void EndGame()
         {
-            if (pageContents[0].Contains("Ending"))
+            if (story[maxPage - 1].Contains(pageContents[0])) //if (pageContents[0].Contains("Ending"))
             {
                 Console.WriteLine("      ┬─┐┌─┐┌─┐┌┬┐  ┌┬┐┬ ┬┌─┐  ┌─┐┌┬┐┌─┐┬─┐┬ ┬  ┌─┐┌─┐┌─┐┬┌┐┌  ┌─┐┌─┐┬─┐  ┌─┐  ┌┐┌┌─┐┬ ┬  ┌─┐┬ ┬┌┬┐┌─┐┌─┐┌┬┐┌─┐┬");
                 Console.WriteLine("      ├┬┘├┤ ├─┤ ││   │ ├─┤├┤   └─┐ │ │ │├┬┘└┬┘  ├─┤│ ┬├─┤││││  ├┤ │ │├┬┘  ├─┤  │││├┤ │││  │ ││ │ │ │  │ ││││├┤ │");
@@ -159,7 +165,7 @@ namespace Interactive
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
-            if (pageContents[0].Contains("vain"))
+            if (story[9].Contains(pageContents[0])) //change the 9 into something else, is hardcoded
             {
                 Console.WriteLine("                                   ┬ ┬┌─┐┬ ┬┬─┐   ┬┌─┐┬ ┬┬─┐┌┐┌┌─┐┬ ┬  ┬┌─┐  ┌─┐┬  ┬┌─┐┬─┐");
                 Console.WriteLine("                                   └┬┘│ ││ │├┬┘   ││ ││ │├┬┘│││├┤ └┬┘  │└─┐  │ │└┐┌┘├┤ ├┬┘");
