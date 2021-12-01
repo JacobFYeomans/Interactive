@@ -141,6 +141,18 @@ namespace Interactive
                     }
                     break;
 
+                case "4":
+
+                    if (firstChoice == false)
+                    {
+                        Environment.Exit(0);
+                    }
+                    if (firstChoice == true)
+                    {
+                        //Edit Keybinds
+                    }
+                    break;
+
                 default:
                     
                     if (firstChoice == true)
