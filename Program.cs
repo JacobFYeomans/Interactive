@@ -17,6 +17,11 @@ namespace Interactive
         static int choice;
         static string[] pageContents;
         static bool failState = false; //the game runs on a while loop that requires this to be false
+        //inputs
+        static char buttonOne = '1';
+        static char buttonTwo = '2';
+        static char buttonThree = '3';
+        static char buttonFour = '4';
 
         static void Introduction()
         {
