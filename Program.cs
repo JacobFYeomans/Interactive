@@ -61,11 +61,13 @@ namespace Interactive
             PrintIntroInfo();
             Introduction();
         }
-        static void saveFileCheck()//to be used
+        static void saveFileCheck() //checks to see if save.txt exists, if it doesn,t it creates it with a default value of 0
         {
-
+            if (!File.Exists(@"save.txt"))
+            {
+                File.AppendAllText("save.txt", "0");
+            }
         }
-
         static void ColourText()
         {
             Console.ForegroundColor = ConsoleColor.Red;
@@ -78,7 +80,7 @@ namespace Interactive
                 Console.ForegroundColor = ConsoleColor.DarkGreen;
                 Console.WriteLine("PAGE: " + (page + 1)); // done so that there is no page 0
                 Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Red;
                 foreach (string x in pageContents)
                 {
                     if (x != null && x != pageContents[3] && x != pageContents[4]) // X != null is to prevent an issue in which x can be null, x != pageContents[3] & [4] is to prevent the last 2 segments of the text from being printed
@@ -150,7 +152,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        Environment.Exit(0);
+                        Environment.Exit(0); //make more elegent?
                     }
                     if (firstChoice == true)
                     {
@@ -162,7 +164,7 @@ namespace Interactive
                     
                     if (firstChoice == true)
                     {
-                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit."); // skips first page if improper input on Start/Quit OR if you try to load game
+                        Console.WriteLine("Input not recognized, please chose option 1 to start or 2 to quit."); // skips first page if improper input and you started, and loading save file doesn't work after improper input & and looping after an ending
                         PlayerChoice();
                     }
                     if (firstChoice == false)
@@ -230,6 +232,7 @@ namespace Interactive
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
+                    saveFileCheck();
                     SplitString();
                     PrintPage(pageNumber);
                     SplitString();
