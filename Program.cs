@@ -67,8 +67,9 @@ namespace Interactive
             {
                 File.AppendAllText("save.txt", "0");
             }
+            
         }
-        static void StoryFileCheck()
+        static void StoryFileCheck() //checks to see if story.txt exists, prevents program from running if it does not.
         {
             if (!File.Exists(@"story.txt"))
             {
@@ -79,7 +80,8 @@ namespace Interactive
         }
         static void FileChecking()
         {
-
+            SaveFileCheck();
+            StoryFileCheck();
         }
         static void ColourText()
         {
