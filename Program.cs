@@ -61,12 +61,25 @@ namespace Interactive
             PrintIntroInfo();
             Introduction();
         }
-        static void saveFileCheck() //checks to see if save.txt exists, if it doesn,t it creates it with a default value of 0
+        static void SaveFileCheck() //checks to see if save.txt exists, if it doesn,t it creates it with a default value of 0
         {
             if (!File.Exists(@"save.txt"))
             {
                 File.AppendAllText("save.txt", "0");
             }
+        }
+        static void StoryFileCheck()
+        {
+            if (!File.Exists(@"story.txt"))
+            {
+                Console.WriteLine("No story file exists.");
+                Console.ReadKey(true);
+                Environment.Exit(0);
+            }
+        }
+        static void FileChecking()
+        {
+
         }
         static void ColourText()
         {
@@ -222,6 +235,8 @@ namespace Interactive
         }
         static void Main(string[] args)
         {
+            StoryFileCheck();
+            SaveFileCheck();
             PrintIntroInfo();
             Console.WriteLine("");
             Console.WriteLine("");
@@ -232,7 +247,8 @@ namespace Interactive
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
-                    saveFileCheck();
+                    StoryFileCheck();
+                    SaveFileCheck();
                     SplitString();
                     PrintPage(pageNumber);
                     SplitString();
