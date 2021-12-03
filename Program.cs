@@ -73,7 +73,7 @@ namespace Interactive
         {
             if (!File.Exists(@"story.txt"))
             {
-                Console.WriteLine("No story file exists.");
+                Console.WriteLine("No story file exists. Please redownload game to fix issue.");
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
@@ -82,6 +82,16 @@ namespace Interactive
         {
             SaveFileCheck();
             StoryFileCheck();
+            //string value = File.ReadAllText(@"save.txt");
+            //int temp = int.Parse(value);
+            //if (temp <= maxPage && temp >= 0)
+            //{
+            //    Console.WriteLine("Save file is not corrupt");
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Save file is corrupt");
+            //}
         }
         static void ColourText()
         {
