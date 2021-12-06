@@ -14,6 +14,7 @@ namespace Interactive
         static string input;
         static string[] story = File.ReadAllLines(@"story.txt"); //parse # of lines read, make maxPages = # of lines read.
         static int maxPage = story.Length; //for range checking purposes
+        static string savePage;
         static bool firstChoice = true;
         static int choice;
         static string[] pageContents;
@@ -78,10 +79,15 @@ namespace Interactive
                 Environment.Exit(0);
             }
         }
-        static void saveFileCheck()//to be used
-        {
-
-        }
+        //static void saveFileCheck()//to be used
+        //{
+        //    string saveCheck = File.ReadAllText(@"save.txt");
+        //    int saveCheckInt = int.Parse(saveCheck);
+        //    if (saveCheckInt > maxPage || saveCheckInt < 0)
+        //    {
+        //         = 0;
+        //    }
+        //}
         static void PrintPage(int page)
         {
             if (page != -1 && firstChoice == false) 
@@ -211,7 +217,7 @@ namespace Interactive
         }
         static void LoadGame()
         {
-            string savePage = File.ReadAllText(@"save.txt");
+            savePage = File.ReadAllText(@"save.txt");
             pageNumber = int.Parse(savePage); //range check for null
             firstChoice = false;
         }
