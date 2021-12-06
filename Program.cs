@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace Interactive
         static int choice;
         static string[] pageContents;
         static bool failState = false; //the game runs on a while loop that requires this to be false
+
         //inputs
         static char buttonOne = '1';
         static char buttonTwo = '2';
@@ -61,14 +63,23 @@ namespace Interactive
             PrintIntroInfo();
             Introduction();
         }
+        static void StoryChecking()
+        {
+            if (!File.Exists(@"story.txt"))
+            {
+                Console.WriteLine("the story file has been deleted. Please redownload to resolve issue");
+                Console.ReadKey(true);
+                Environment.Exit(0);
+            }
+            if (story.Length != 19) //this value has to change with the # of lines in the story
+            {
+                Console.WriteLine("the story has been deleted from the file. Please redownload to resolve issue");
+                Console.ReadKey(true);
+                Environment.Exit(0);
+            }
+        }
         static void saveFileCheck()//to be used
         {
-
-        }
-
-        static void ColourText()
-        {
-            Console.ForegroundColor = ConsoleColor.Red;
 
         }
         static void PrintPage(int page)
@@ -102,11 +113,16 @@ namespace Interactive
         }
         static void DefineChoice(int page)
         {
-            choice = int.Parse(pageContents[page]);
+            choice = int.Parse(pageContents[pageContents.Length - page]);
             pageNumber = choice - 1; //this is where the page skip comes in
         } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //add 3 and 4 for save and quit
         {
+            //string inputOne = buttonOne.ToString();
+            //string inputTwo = buttonTwo.ToString();
+            //string inputThree = buttonThree.ToString();
+            //string inputFour = buttonFour.ToString();
+
             input = Console.ReadLine();
             switch (input)
             {
@@ -114,7 +130,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        DefineChoice(3); //Anti-Modular
+                        DefineChoice(2); //Anti-Modular
                     }
                     if (firstChoice == true)
                     {
@@ -130,7 +146,7 @@ namespace Interactive
                     }
                     if (firstChoice == false)
                     {
-                        DefineChoice(4); 
+                        DefineChoice(1); 
                     }
                     break;
 
@@ -220,6 +236,7 @@ namespace Interactive
         }
         static void Main(string[] args)
         {
+            StoryChecking();
             PrintIntroInfo();
             Console.WriteLine("");
             Console.WriteLine("");
