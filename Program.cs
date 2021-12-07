@@ -33,11 +33,11 @@ namespace Interactive
             return sOutput.ToString();
         }
 
-        //inputs
-        static char buttonOne = '1';
-        static char buttonTwo = '2';
-        static char buttonThree = '3';
-        static char buttonFour = '4';
+        //modular inputs
+        //static char buttonOne = '1';
+        //static char buttonTwo = '2';
+        //static char buttonThree = '3';
+        //static char buttonFour = '4';
 
         static void Introduction()
         {
@@ -99,14 +99,12 @@ namespace Interactive
             }
             HashCheck();
         }
-        static void saveFileCheck()//to be used
+        static void SaveChecking()//to be used
         {
-            //string saveCheck = File.ReadAllText(@"save.txt");
-            //int saveCheckInt = int.Parse(saveCheck);
-            //if (saveCheckInt > maxPage || saveCheckInt < 0)
-            //{
-            //    savePage = 0; //wrong
-            //}
+            if (!File.Exists(@"save.txt"))
+            {
+
+            }
         }
         static void PrintPage(int page)
         {
@@ -120,8 +118,17 @@ namespace Interactive
                 {
                     if (x != null && x != pageContents[pageContents.Length - 2] && x != pageContents[pageContents.Length - 1]) // X != null is to prevent an issue in which x can be null, the x != pageContents[pageContents.Length - 2] && x != pageContents[pageContents.Length - 1] is to make it so the page options are never printed
                     {
-                            Console.WriteLine(x); //figure out colour
+                        if (x == pageContents[pageContents.Length - 3] || x == pageContents[pageContents.Length - 4])
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine(x);
                             Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine(x);
+                            Console.WriteLine();
+                        }
                     }
 
                 }
@@ -144,6 +151,7 @@ namespace Interactive
         } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //add 3 and 4 for save and quit
         {
+            //modular inputs
             //string inputOne = buttonOne.ToString();
             //string inputTwo = buttonTwo.ToString();
             //string inputThree = buttonThree.ToString();
@@ -192,7 +200,7 @@ namespace Interactive
 
                     if (firstChoice == false)
                     {
-                        Environment.Exit(0); //make more elegent?
+                        Environment.Exit(0);
                     }
                     if (firstChoice == true)
                     {
