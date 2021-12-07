@@ -41,6 +41,8 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("");
+            Console.WriteLine("                           All choices are made using the buttons '1' or '2'.");
+            Console.WriteLine("            Additionally, during the story you can save by pressing '3', and quit by pressing '4'");
             Console.ForegroundColor = ConsoleColor.White;
         } 
         static void PrintIntroInfo()
@@ -59,7 +61,7 @@ namespace Interactive
             //Console.WriteLine("To access menu, enter '='");
             Console.ForegroundColor = ConsoleColor.White;
         }
-        static void PrintMainMenu() //merge intro and intro info?
+        static void PrintMainMenu()
         {
             PrintIntroInfo();
             Introduction();
@@ -79,15 +81,15 @@ namespace Interactive
                 Environment.Exit(0);
             }
         }
-        //static void saveFileCheck()//to be used
-        //{
-        //    string saveCheck = File.ReadAllText(@"save.txt");
-        //    int saveCheckInt = int.Parse(saveCheck);
-        //    if (saveCheckInt > maxPage || saveCheckInt < 0)
-        //    {
-        //         = 0;
-        //    }
-        //}
+        static void saveFileCheck()//to be used
+        {
+            //string saveCheck = File.ReadAllText(@"save.txt");
+            //int saveCheckInt = int.Parse(saveCheck);
+            //if (saveCheckInt > maxPage || saveCheckInt < 0)
+            //{
+            //    savePage = 0; //wrong
+            //}
+        }
         static void PrintPage(int page)
         {
             if (page != -1 && firstChoice == false) 
@@ -98,7 +100,7 @@ namespace Interactive
                 Console.ForegroundColor = ConsoleColor.Red;
                 foreach (string x in pageContents)
                 {
-                    if (x != null && x != pageContents[3] && x != pageContents[4]) // X != null is to prevent an issue in which x can be null, x != pageContents[3] & [4] is to prevent the last 2 segments of the text from being printed
+                    if (x != null && x != pageContents[pageContents.Length - 2] && x != pageContents[pageContents.Length - 1]) // X != null is to prevent an issue in which x can be null, the x != pageContents[pageContents.Length - 2] && x != pageContents[pageContents.Length - 1] is to make it so the page options are never printed
                     {
                             Console.WriteLine(x); //figure out colour
                             Console.WriteLine();
@@ -253,8 +255,7 @@ namespace Interactive
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
-                    StoryFileCheck();
-                    SaveFileCheck();
+                    
                     SplitString();
                     PrintPage(pageNumber);
                     SplitString();
