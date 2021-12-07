@@ -22,6 +22,7 @@ namespace Interactive
         static string storyHash = File.ReadAllText(@"story.txt");
         static byte[] tmpSource;
         static byte[] tmpHash;
+        static string path = @"save.txt";
         static string ByteArrayToString(byte[] arrInput)
         {
             int i;
@@ -103,7 +104,7 @@ namespace Interactive
         {
             if (!File.Exists(@"save.txt"))
             {
-
+                File.Create(path);
             }
         }
         static void PrintPage(int page)
@@ -271,6 +272,7 @@ namespace Interactive
         static void Main(string[] args)
         {
             StoryChecking();
+            SaveChecking();
             PrintIntroInfo();
             Console.WriteLine("");
             Console.WriteLine("");
