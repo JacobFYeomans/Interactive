@@ -19,10 +19,12 @@ namespace Interactive
         static int choice;
         static string[] pageContents;
         static bool failState = false; //the game runs on a while loop that requires this to be false
-        static string storyHash = File.ReadAllText(@"story.txt");
+        static string storyHash = File.ReadAllText(@"story.txt"); //merge the reads into one and split elsewhere with a new delimiter
         static byte[] tmpSource;
         static byte[] tmpHash;
         static string path = @"save.txt";
+
+
         static string ByteArrayToString(byte[] arrInput)
         {
             int i;
@@ -100,11 +102,13 @@ namespace Interactive
             }
             HashCheck();
         }
-        static void SaveChecking()//to be used
+        static void SaveChecking()//why does this crash if the file is deleted, then work if run a 2nd time.
         {
             if (!File.Exists(@"save.txt"))
             {
+                string newSaveInitialization = "1";
                 File.Create(path);
+                File.WriteAllText(@"save.txt", newSaveInitialization);
             }
         }
         static void PrintPage(int page)
