@@ -97,12 +97,7 @@ namespace Interactive
                 Console.ReadKey(true);
                 Environment.Exit(0);
             }
-            if (story.Length != 19) //this value has to change with the # of lines in the story
-            {
-                Console.WriteLine("the story has been deleted from the file. Please redownload to resolve issue");
-                Console.ReadKey(true);
-                Environment.Exit(0);
-            }
+            HashCheck();
         }
         static void saveFileCheck()//to be used
         {
@@ -267,7 +262,6 @@ namespace Interactive
         }
         static void Main(string[] args)
         {
-            HashCheck();
             StoryChecking();
             PrintIntroInfo();
             Console.WriteLine("");
