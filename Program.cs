@@ -26,7 +26,7 @@ namespace Interactive
         {
             int i;
             StringBuilder sOutput = new StringBuilder(arrInput.Length);
-            for (i = 0; 1 < arrInput.Length; i++)
+            for (i = 0; i < arrInput.Length; i++)
             {
                 sOutput.Append(arrInput[i].ToString("X2"));
             }
@@ -62,7 +62,11 @@ namespace Interactive
         {
             tmpSource = ASCIIEncoding.ASCII.GetBytes(storyHash);
             tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
-            Console.WriteLine(ByteArrayToString(tmpHash));
+            if (ByteArrayToString(tmpHash) != "FC5BC3119A3C3DCA38B1B59DC2146815")
+            {
+                Console.WriteLine("Story is Corrupted");
+                failState = true;
+            }
         }
         static void PrintIntroInfo()
         {
@@ -263,6 +267,7 @@ namespace Interactive
         }
         static void Main(string[] args)
         {
+            HashCheck();
             StoryChecking();
             PrintIntroInfo();
             Console.WriteLine("");
