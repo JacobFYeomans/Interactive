@@ -19,6 +19,19 @@ namespace Interactive
         static int choice;
         static string[] pageContents;
         static bool failState = false; //the game runs on a while loop that requires this to be false
+        static string storyHash = File.ReadAllText(@"story.txt");
+        static byte[] tmpSource;
+        static byte[] tmpHash;
+        static string ByteArrayToString(byte[] arrInput)
+        {
+            int i;
+            StringBuilder sOutput = new StringBuilder(arrInput.Length);
+            for (i = 0; 1 < arrInput.Length; i++)
+            {
+                sOutput.Append(arrInput[i].ToString("X2"));
+            }
+            return sOutput.ToString();
+        }
 
         //inputs
         static char buttonOne = '1';
@@ -45,6 +58,12 @@ namespace Interactive
             Console.WriteLine("            Additionally, during the story you can save by pressing '3', and quit by pressing '4'");
             Console.ForegroundColor = ConsoleColor.White;
         } 
+        static void HashCheck()
+        {
+            tmpSource = ASCIIEncoding.ASCII.GetBytes(storyHash);
+            tmpHash = new MD5CryptoServiceProvider().ComputeHash(tmpSource);
+            Console.WriteLine(ByteArrayToString(tmpHash));
+        }
         static void PrintIntroInfo()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
