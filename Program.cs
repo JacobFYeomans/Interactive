@@ -197,6 +197,7 @@ namespace Interactive
                     }
                     if (firstChoice == true)
                     {
+                        firstChoice = false;
                         LoadGame();
                     }
                     break;
