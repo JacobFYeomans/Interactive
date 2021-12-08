@@ -107,9 +107,9 @@ namespace Interactive
             if (!File.Exists(@"save.txt"))
             {
                 string newSaveInitialization = "1";
-                File.Create(path);
                 File.WriteAllText(@"save.txt", newSaveInitialization);
             }
+
         }
         static void PrintPage(int page)
         {
