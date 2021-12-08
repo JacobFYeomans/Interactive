@@ -22,7 +22,6 @@ namespace Interactive
         static string storyHash = File.ReadAllText(@"story.txt"); //merge the reads into one and split elsewhere with a new delimiter
         static byte[] tmpSource;
         static byte[] tmpHash;
-        static string path = @"save.txt";
 
 
         static string ByteArrayToString(byte[] arrInput)
@@ -35,12 +34,6 @@ namespace Interactive
             }
             return sOutput.ToString();
         }
-
-        //modular inputs
-        //static char buttonOne = '1';
-        //static char buttonTwo = '2';
-        //static char buttonThree = '3';
-        //static char buttonFour = '4';
 
         static void Introduction()
         {
@@ -102,14 +95,42 @@ namespace Interactive
             }
             HashCheck();
         }
-        static void SaveChecking()//why does this crash if the file is deleted, then work if run a 2nd time.
+        static void SaveChecking()
         {
             if (!File.Exists(@"save.txt"))
             {
-                string newSaveInitialization = "1";
+                string newSaveInitialization = "0";
+                File.WriteAllText(@"save.txt", newSaveInitialization);
+            }
+            string saveChecking = File.ReadAllText(@"save.txt");
+            try
+            {
+                int saveValueChecking = int.Parse(saveChecking);
+            }
+            catch
+            {
+                string newSaveInitialization = "0";
+                File.WriteAllText(@"save.txt", newSaveInitialization);
+            }
+            int saveValueChecking2 = int.Parse(saveChecking);
+            if (saveValueChecking2 < 0 || saveValueChecking2 > maxPage)
+            {
+                string newSaveInitialization = "0";
                 File.WriteAllText(@"save.txt", newSaveInitialization);
             }
 
+
+            //if (saveChecking.Length == 0 || saveChecking.Length >= 2)
+            //{
+            //    string newSaveInitialization = "0";
+            //    File.WriteAllText(@"save.txt", newSaveInitialization);
+            //}
+            //int saveValueChecking = int.Parse(saveChecking);
+            //if (saveValueChecking < 0 || saveValueChecking > maxPage)
+            //{
+            //    string newSaveInitialization = "1";
+            //    File.WriteAllText(@"save.txt", newSaveInitialization);
+            //}
         }
         static void PrintPage(int page)
         {
@@ -156,11 +177,6 @@ namespace Interactive
         } //Console.Beep(tone, length); for sound effects
         static void PlayerChoice() //add 3 and 4 for save and quit
         {
-            //modular inputs
-            //string inputOne = buttonOne.ToString();
-            //string inputTwo = buttonTwo.ToString();
-            //string inputThree = buttonThree.ToString();
-            //string inputFour = buttonFour.ToString();
 
             input = Console.ReadLine();
             switch (input)
@@ -288,7 +304,6 @@ namespace Interactive
             {
                 while (pageNumber - 1 < maxPage) //loop is double nested to allow range checking on the page//consider splitting loop into 2 if statements so that story doesn't skip first page if improper input is detected in first choice.
                 {
-                    
                     SplitString();
                     PrintPage(pageNumber);
                     SplitString();
