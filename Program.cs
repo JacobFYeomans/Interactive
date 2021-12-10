@@ -51,7 +51,7 @@ namespace Interactive
             Console.WriteLine("");
             Console.WriteLine("");
             Console.WriteLine("                           All choices are made using the buttons '1' or '2'.");
-            Console.WriteLine("            Additionally, during the story you can save by pressing '3', and quit by pressing '4'");
+            Console.WriteLine("  Additionally, during the story you can save by pressing '3', and return to main menu by pressing '4'");
             Console.ForegroundColor = ConsoleColor.White;
         } 
         static void HashCheck()
@@ -223,10 +223,6 @@ namespace Interactive
                     if (firstChoice == false)
                     {
                         Environment.Exit(0);
-                    }
-                    if (firstChoice == true)
-                    {
-                        //Edit Keybinds
                     }
                     break;
 
